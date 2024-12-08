@@ -130,5 +130,5 @@ data class Consignee(
 )
 
 enum class Relay {
-    NONE, AIR, OCEAN, LAND, PARCEL
+    AIR, OCEAN, LAND, PARCEL
 }

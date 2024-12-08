@@ -13,7 +13,6 @@ class MessageService {
     fun forwardToDepartments(message: Message): String {
         val relay = message.orderInfo.relay
         val url = when (relay) {
-            Relay.NONE -> return "Relay가 None 입니다."
             Relay.PARCEL -> "http://test1/parcel"
             Relay.AIR -> "http://test2/air"
             Relay.OCEAN -> "http://test3/ocean"
