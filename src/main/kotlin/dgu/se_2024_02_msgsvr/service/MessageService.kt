@@ -12,12 +12,14 @@ class MessageService {
 
     fun forwardToDepartments(message: Message): String {
         val relay = message.orderInfo.relay
-        if (relay == Relay.NONE) {
-            return "Relay가 None 입니다."
+        val url = when (relay) {
+            Relay.NONE -> return "Relay가 None 입니다."
+            Relay.PARCEL -> "http://test1/parcel"
+            Relay.AIR -> "http://test2/air"
+            Relay.OCEAN -> "http://test3/ocean"
+            Relay.LAND -> "http://test4/land"
         }
 
-        val department = relay.name
-        val url = "http://test/$department"
         return try {
             val response: ResponseEntity<String> = restTemplate.postForEntity(url, message, String::class.java)
             "${response.body} 전송 성공"
@@ -26,5 +28,3 @@ class MessageService {
         }
     }
 }
-
-
