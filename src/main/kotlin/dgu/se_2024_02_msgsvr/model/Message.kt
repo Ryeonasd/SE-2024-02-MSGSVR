@@ -1,134 +1,110 @@
 package dgu.se_2024_02_msgsvr.model
 
 data class Message(
-    val orderInfo: OrderInfo,
-    val insuranceInfo: InsuranceInfo,
-    val transportInfo: TransportInfo,
-    val customsInfo: CustomsInfo,
-    val shipmentStatus: List<ShipmentStatus>,
-    val billOfLading: BillOfLading,
-    val airWaybill: AirWaybill
+    val relay: String?,
+    val order_info: OrderInfo?,
+    val items: List<Item>?,
+    val insurance_info: List<InsuranceInfo>?,
+    val customs_info: List<CustomsInfo>?,
+    val shipment_status: List<ShipmentStatus>?,
+    val bill_of_lading: BillOfLading?,
+    val air_waybill: AirWaybill?
 )
 
 data class OrderInfo(
-    val orderNumber: String,
-    val shippingInfo: ShippingInfo,
-    val items: List<Item>,
-    val trackingNumber: String,
-    val containerNumber: String,
-    val cargoNumber: String,
-    val relay: Relay
+    val shipping_info: ShippingInfo?
 )
 
 data class ShippingInfo(
-    val originCountry: String,
-    val destinationCountry: String,
-    val originAddress: Address,
-    val destinationAddress: Address,
-    val sender: Sender,
-    val receiver: Receiver
+    val tracking_number: String?,
+    val origin_address: Address?,
+    val destination_address: Address?,
+    val sender: User?,
+    val receiver: User?
 )
 
 data class Address(
-    val city: String,
-    val detail: String,
-    val postalCode: String
+    val country: String?,
+    val city: String?,
+    val detail: String?,
+    val postal_code: String?
 )
 
-data class Sender(
-    val name: String,
-    val email: String,
-    val phone: String,
-    val customsId: String
-)
-
-data class Receiver(
-    val name: String,
-    val email: String,
-    val phone: String,
-    val customsId: String
+data class User(
+    val name: String?,
+    val email: String?,
+    val phone: String?,
+    val customs_id: String?
 )
 
 data class Item(
-    val name: String,
-    val isImported: Boolean,
-    val hsCode: String,
-    val weight: Double,
-    val quantity: Int,
-    val x: Int,
-    val y: Int,
-    val z: Int,
-    val hazardous: Boolean,
-    val price: Int
+    val tracking_number: String?,
+    val name: String?,
+    val is_imported: Boolean?,
+    val hs_code: String?,
+    val weight: Double?,
+    val quantity: Int?,
+    val x: Int?,
+    val y: Int?,
+    val z: Int?,
+    val hazardous: Boolean?,
+    val price: Int?
 )
 
 data class InsuranceInfo(
-    val company: String,
-    val policyNumber: String,
-    val coverageAmount: Int,
-    val coverageScope: String,
-    val startDate: String,
-    val endDate: String,
-    val premium: Int
-)
-
-data class TransportInfo(
-    val originAddress: String,
-    val destinationAddress: String,
-    val pickupTime: String,
-    val estimatedArrivalTime: String,
-    val trackingNumber: String
+    val company: String?,
+    val policy_number: String?,
+    val coverage_amount: Int?,
+    val coverage_scope: String?,
+    val start_date: String?,
+    val end_date: String?,
+    val premium: Int?
 )
 
 data class CustomsInfo(
-    val dutyAmount: Int,
-    val ftaApplicable: Boolean,
-    val paymentMethod: String,
-    val customsDeclarationNumber: String
+    val duty_amount: Int?,
+    val fta_applicable: Boolean?,
+    val payment_method: String?,
+    val customs_declaration_number: String?
 )
 
 data class ShipmentStatus(
-    val trackingNumber: String,
-    val transportVehicleNumber: String,
-    val currentLocation: String,
-    val currentStatus: String,
-    val lastUpdated: String,
-    val remarks: String
+    val tracking_number: String?,
+    val transport_vehicle_number: String?,
+    val current_location: String?,
+    val current_status: String?,
+    val last_updated: String?,
+    val remarks: String?
 )
 
 data class BillOfLading(
-    val shipper: Shipper,
-    val consignee: Consignee,
-    val blNumber: String,
-    val loadingPort: String,
-    val dischargePort: String,
-    val vesselName: String,
-    val vesselNumber: String,
-    val shipmentDate: String
+    val shipper: UserInfo?,
+    val consignee: UserInfo?,
+    val bl_number: String?,
+    val loading_port: String?,
+    val discharge_port: String?,
+    val vessel_name: String?,
+    val vessel_number: String?,
+    val shipment_date: String?
 )
 
 data class AirWaybill(
-    val shipper: Shipper,
-    val consignee: Consignee,
-    val awbNumber: String,
-    val departureAirport: String,
-    val destinationAirport: String,
-    val aircraftName: String,
-    val aircraftNumber: String,
+    val shipper: UserInfo?,
+    val consignee: UserInfo?,
+    val awb_number: String?,
+    val departure_airport: String?,
+    val destination_airport: String?,
+    val aircraft_name: String?,
+    val aircraft_number: String?,
+    val shipment_date: String?
 )
 
-data class Shipper(
-    val name: String,
-    val address: String,
-    val contact: String
-)
-
-data class Consignee(
-    val name: String,
-    val address: String,
-    val contact: String
+data class UserInfo(
+    val name: String?,
+    val address: String?,
+    val contact: String?
 )
 
 enum class Relay {
-    NONE, AIR, OCEAN, LAND, PARCEL
+    AIR, OCEAN, LAND, PARCEL
 }
