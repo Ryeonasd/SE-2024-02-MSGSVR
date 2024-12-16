@@ -2,7 +2,7 @@ package dgu.se_2024_02_msgsvr.model
 
 data class Message(
     val relay: Relay?,
-    val order_info: OrderInfo?,
+    val order_info: OrderInfo?
 )
 
 data class OrderInfo(
