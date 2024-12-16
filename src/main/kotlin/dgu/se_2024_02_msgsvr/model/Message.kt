@@ -3,16 +3,16 @@ package dgu.se_2024_02_msgsvr.model
 data class Message(
     val relay: Relay?,
     val order_info: OrderInfo?,
+)
+
+data class OrderInfo(
+    val shipping_info: ShippingInfo?,
     val items: List<Item>?,
     val insurance_info: List<InsuranceInfo>?,
     val customs_info: List<CustomsInfo>?,
     val shipment_status: List<ShipmentStatus>?,
     val bill_of_lading: BillOfLading?,
     val air_waybill: AirWaybill?
-)
-
-data class OrderInfo(
-    val shipping_info: ShippingInfo?
 )
 
 data class ShippingInfo(
@@ -65,7 +65,7 @@ data class CustomsInfo(
     val duty_amount: Int?,
     val fta_applicable: Boolean?,
     val payment_method: String?,
-    val customs_declaration_number: String?
+    //val customs_declaration_number: String?
 )
 
 data class ShipmentStatus(

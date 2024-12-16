@@ -15,12 +15,19 @@ class MessageService {
             Relay.PARCEL -> "http://test1/parcel"
             Relay.AIR -> "http://test2/air"
             Relay.OCEAN -> "http://test3/ocean"
-            Relay.LAND -> "http://test4/land"
+            Relay.LAND -> "http://192.168.219.108:8080"
             else -> return "잘못된 부서 정보: $relay"
         }
 
+        val uri = when (relay) {
+            Relay.PARCEL -> "/receive"
+            Relay.AIR -> "/receive"
+            Relay.OCEAN -> "/receive"
+            Relay.LAND -> "/receive"
+        }
+
         return try {
-            val response: ResponseEntity<String> = restTemplate.postForEntity(url, message, String::class.java)
+            val response: ResponseEntity<String> = restTemplate.postForEntity(url, message, String::class.java, uri)
             "${response.body} 메시지 전송 성공, URL: $url"
         } catch (e: Exception) {
             "메시지 전송 실패: ${e.message}"

@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity
 @RequestMapping("/message")
 class MessageController(private val messageService: MessageService) {
 
-    @PostMapping("/receive")
-    fun receiveMessage(@RequestBody message: Message): ResponseEntity<String> {
+    @PostMapping("/send")
+    fun sendMessage(@RequestBody message: Message): ResponseEntity<String> {
         val result = messageService.forwardToDepartments(message)
         return ResponseEntity.ok(result)
     }
