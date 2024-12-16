@@ -11,8 +11,13 @@ class MessageController(private val messageService: MessageService) {
 
     @PostMapping("/send")
     fun sendMessage(@RequestBody message: Message): ResponseEntity<String> {
-        val result = messageService.forwardToDepartments(message)
-        return ResponseEntity.ok(result)
+        try {
+            val result = messageService.forwardToDepartments(message)
+            return ResponseEntity.ok(result)
+        }
+        catch (e: Exception) {
+            return ResponseEntity.badRequest().body(e.message)
+        }
     }
 }
 
